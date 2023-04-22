@@ -1,38 +1,65 @@
 import './index.scss'
-import { useEffect, useState } from 'react';
+import React from 'react';
+import { useNavigate } from "react-router-dom";
 
-function Login() {
+
+
+class Login extends React.Component {
     //login for users
+    handleSignIn = () => {
+        const navigate = useNavigate();
+        navigate("/signin");
+    }
     
-    const [reveal, setReveal] = useState(false);
-    useEffect(() => {
-        console.log("hoe")
-        window.scroll({
-            top: document.body.offsetHeight,
-            left: 0, 
-            behavior: 'smooth',
-        });
-    }, [reveal]); //doesn't work :( someone fix bc i dont want to thanks one love
-    function revealSection() {
-        setReveal(!reveal);
+    handleSignUp = () => {
+        const navigate = useNavigate();
+        navigate("/signup");
     }
-
-    function scoll() {
+    constructor(props) {
+        super(props);
+        this.state = {
+            reveal: false
+        }
+        this.handleChange = this.handleChange.bind(this);
+    }
+    handleChange() {
+        this.setState({
+            reveal: true
+        })
+    }
+    componentDidUpdate() {
+        const element = document.getElementById('buttons-container');
+        // window.scroll({
+        //     top: document.body.offsetHeight,
+        //     left: 0, 
+        //     behavior: 'smooth',
+        // });
         
+        element.scrollIntoView({behavior: 'smooth'});
     }
-
-    return (
-        <div className='page-container'>
-            <div className='content-container'>
-                <h1 id='welcome-header'>Zap-Zap!</h1>
-                {!reveal ? <div id='get-started-button'><button id='get-started-button' onClick={revealSection}>  Get Started!</button></div> :
-                <div id='buttons-container'>
-                    <button id='login-button'> Sign in!</button>
-                    <button id='create-account-button'>Sign up!</button>
+    
+    render() {
+        let buttons_container;
+        const reveal = this.state.reveal;
+        if (reveal) {
+            buttons_container = 
+            <div id='buttons-container'>
+                <button id='create-account-button' onClick={this.handleSignIn} type="button">Sign up!</button>
+                <button id='login-button' onClick={this.handleClick} type="button">Sign in!</button>
+            </div>;
+        } 
+        else {
+            buttons_container = 
+            <div id='get-started-button'><button id='get-started-button' onClick={this.handleChange}>  Get Started!</button></div>;
+        }
+        return (
+            <div className='page-container'>
+                <div className='content-container'>
+                    <h1 id='welcome-header'>Zap-Zap!</h1>
+                    {buttons_container}
                 </div>
-                }
             </div>
-        </div>
-    );
+        );
+    }
 }
 export default Login;

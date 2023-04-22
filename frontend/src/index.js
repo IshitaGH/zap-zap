@@ -7,6 +7,8 @@ import reportWebVitals from './reportWebVitals';
 import Settings from './Settings'
 import Dashboard from './Dashboard'
 import Login from './Login'
+import SignIn from './SignIn'
+import SignUp from './SignUp'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -14,6 +16,8 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Login />} />
+        <Route path='/signin' element={<SignIn />} />
+        <Route path='/signup' element={<SignUp />} />
         <Route path='/dashboard/:id' element={<Dashboard />} />
         <Route path='/settings/:id' element={<Settings />} />
       </Routes>
