@@ -1,19 +1,13 @@
 import './index.scss'
 import React from 'react';
-import { useNavigate } from "react-router-dom";
+import {Link} from "react-router-dom";
 
 
 
 class Login extends React.Component {
     //login for users
-    handleSignIn = () => {
-        const navigate = useNavigate();
-        navigate("/signin");
-    }
-    
-    handleSignUp = () => {
-        const navigate = useNavigate();
-        navigate("/signup");
+    nextPath(path) {
+        this.props.history.push(path);
     }
     constructor(props) {
         super(props);
@@ -44,8 +38,8 @@ class Login extends React.Component {
         if (reveal) {
             buttons_container = 
             <div id='buttons-container'>
-                <button id='create-account-button' onClick={this.handleSignIn} type="button">Sign up!</button>
-                <button id='login-button' onClick={this.handleClick} type="button">Sign in!</button>
+                <Link id='create-account-button' to='/signup'>Sign up!</Link>
+                <Link id='login-button' to='/signin'>Sign in!</Link>
             </div>;
         } 
         else {
