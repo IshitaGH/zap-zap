@@ -1,0 +1,31 @@
+@use "../index.scss";
+
+#dashboard-header {
+    display: flex;
+    flex-direction: row wrap;
+    position: relative;
+    top: 0;
+    height: 8vh;
+    width: 100vh;
+}
+
+#profile-pic {
+    border-radius: 50%;
+}
+
+#user-box {
+    display: inline-flex;
+    position: relative;
+    justify-content: flex-end;
+    height: 8vh;
+    position: absolute;
+}
+
+#settings-grid-container {
+    display: grid;
+    column-gap: 20px;
+}
+
+#summary-grid {
+    grid-column: 1 / span 4;
+}

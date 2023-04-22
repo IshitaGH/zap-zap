@@ -1,7 +1,7 @@
-import './index.scss'
+import './index.scss';
 import React from 'react';
 import {Link} from "react-router-dom";
-
+import logo from '../assets/logo.png';
 
 
 class Login extends React.Component {
@@ -44,12 +44,12 @@ class Login extends React.Component {
         } 
         else {
             buttons_container = 
-            <div id='get-started-button'><button id='get-started-button' onClick={this.handleChange}>  Get Started!</button></div>;
+            <div id='get-started-button' onClick={this.handleChange}>  <h1>Get Started!</h1> <div className='triangle'> </div></div>;
         }
         return (
             <div className='page-container'>
                 <div className='content-container'>
-                    <h1 id='welcome-header'>Zap-Zap!</h1>
+                    <img src={logo} id='welcome-header'/>
                     {buttons_container}
                 </div>
             </div>
