@@ -97,52 +97,53 @@ class Dashboard extends React.Component {
             <div className='page-container'>
                 <div className='content-container'>
                     <div id='dashboard-header'>
-                    <img src={logo} alt="logo"/>
-                        <div id='user-box'>
-                            <img src="https://preview.redd.it/oy43s2y9xym81.jpg?auto=webp&s=6ba16c42e3ce1e6328668f21ea48477fc6aa16ca" alt="profile-pic" id='profile-pic'/>
-                            <p>Serena</p>
-                            <button id='trusted-button'>Account Settings</button>
-                            <Link name="logout" id='trusted-button' to='/' onClick={this.handleChange}>Logout</Link>
-                        </div>
+                        <img src={logo} alt="logo" id="logo"/>
+                        <img src="https://preview.redd.it/oy43s2y9xym81.jpg?auto=webp&s=6ba16c42e3ce1e6328668f21ea48477fc6aa16ca" alt="profile-pic" id='profile-pic'/>
+                        <p>Serena</p>
+                        <button className='main-button'>Account Settings</button>
+                        <Link name="logout" className='main-button' to='/' onClick={this.handleChange}>Logout</Link>
                     </div>
+
                     <div id='settings-grid-container'>
                         <div id='summary-and-actions'>
                             <div id='summary-grid'>
                                 <h3 id='summary-header'>Summary</h3>
-                                <p id='status-message'>Mom entered your house at 10am on 4/10/23.</p>
-                                <p id='status-message'>Ishita entered your house at 2am on 4/20/23.</p>
-                                <p id='status-message'>JSON entered your house at 2am on 4/20/23.</p>
-                                <p id='status-message'>Catherine entered your house at 11am on 4/21/23.</p>
+                                <p className='status-message'>Mom entered your house at 10am on 4/10/23.</p>
+                                <p className='status-message'>Ishita entered your house at 2am on 4/20/23.</p>
+                                <p className='status-message'>JSON entered your house at 2am on 4/20/23.</p>
+                                <p className='status-message'>Catherine entered your house at 11am on 4/21/23.</p>
                             </div>
-                            <div class="button" id="contact-button">
+                            <div className="button" id="contact-button">
                                 <div id="spin"></div>
                                 <a>Call Emergency Contacts.</a>
                             </div>
-                            <div class="button" id="contact-button">
+                            <div className="button" id="contact-button">
                                 <div id="spin"></div>
                                 <a>Call 911.</a>
                             </div>
                         </div>
                         <div id='security-settings-grid'>Security Settings
-                            <div class="button" id="contact-button">
+                            <div className="button" id="contact-button">
                                 <div id="spin"></div>
                                 <a>Activate Laser.</a>
                             </div>
-                            <div class="button" id="contact-button">
+                            <div className="button" id="contact-button">
                                 <div id="spin"></div>
                                 <a>Activate Alarm.</a>
                             </div>
-                            <div class="button" id="contact-button">
+                            <div className="button" id="contact-button">
                                 <div id="spin"></div>
                                 <a>Activate Auto Dial Emergency Contacts.</a>
                             </div>
                         </div>
-                        <div id='trusted-people-grid'>Trusted Profiles
-                            <button id='trusted-button' name="add_targets" value={!this.state.add_targets} onClick={this.handleChange}>Create New Trusted Profile</button>
-                            {trusted_add_form}
-                            <button id='trusted-button' name="update_targets" value={!this.state.update_targets} onClick={this.handleChange}>Update Trusted Profiles</button>
-                            {trusted_update_form}
-                        </div>
+                    </div>
+
+                    <h2 id="trusted-title">Trusted Profiles</h2>
+                    <div id='trusted-people-grid'>
+                        <button className='main-button' name="add_targets" value={!this.state.add_targets} onClick={this.handleChange}>Create New Trusted Profile</button>
+                        {trusted_add_form}
+                        <button className='main-button' name="update_targets" value={!this.state.update_targets} onClick={this.handleChange}>Update Trusted Profiles</button>
+                        {trusted_update_form}
                     </div>
                 </div>
             </div>
