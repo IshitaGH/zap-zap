@@ -181,7 +181,6 @@ def face_recognition(frame, gray):
         if (confidence < 50):
             id = names[id]
             confidence = "  {0}%".format(round(100 - confidence))
-            print("confidence: " + confidence)
             return True
         else:
             id = "unknown"
