@@ -18,8 +18,8 @@ root.render(
         <Route path='/' element={<Login />} />
         <Route path='/signin' element={<SignIn />} />
         <Route path='/signup' element={<SignUp />} />
-        <Route path='/dashboard/:id' element={<Dashboard />} />
-        <Route path='/settings/:id' element={<Settings />} />
+        <Route path='/dashboard' element={<Dashboard />} />
+        <Route path='/settings' element={<Settings />} />
       </Routes>
     </BrowserRouter></React.StrictMode>,
     document.getElementById('root')

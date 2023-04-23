@@ -18,7 +18,7 @@ function SignIn() {
                     window.sessionStorage.setItem("user-data", user);
                 }
             }
-            navigate(`/dashboard${window.sessionStorage.getItem("user-data").id}`);
+            navigate(`/dashboard`);
         }
         else {
             setError(true);

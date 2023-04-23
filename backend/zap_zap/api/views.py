@@ -13,6 +13,7 @@ from rest_framework import status
 import json
 from django.http import JsonResponse
 from rest_framework.views import APIView
+from django.shortcuts import redirect
 # from rest_framework.permissions import IsAuthenticated
 
 
@@ -39,7 +40,7 @@ def add_user(request):
     user = User.objects.create(username=username, password=password)
     user.save()
 
-    return Response("cool")
+    return redirect("http://localhost:3000/dashboard")
 
 @api_view(['GET'])
 def get_profile_data(request):
