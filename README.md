@@ -1,6 +1,6 @@
 # zap-zap
 
-Our product - *Zap-Zap* - is a home security system that uses machine learning to alert against people considered intruders, ie. those not saved within the trusted database connected with the homeowner’s account. It works by ringing an alarm as soon as it detects an intruder. It also aims a laser at the intruder’s eyes to temporarily stun them and give those living within the home to react.
+Our product - *Zap-Zap* - is a home security system that uses machine learning to alert against people considered intruders, ie. those not saved within the trusted database connected with the homeowner’s account. It works by ringing an alarm as soon as it detects an intruder. It also aims a laser at the intruder’s eyes to temporarily stun them and give those living within the home time to react.
 
 ## Features
 * Eye Detection
