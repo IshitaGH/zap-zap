@@ -67,8 +67,9 @@ try:
             j1 = int(j1)
             i2 = int(i2)
             j2 = int(j2)
+            print(f"{i1}\t{j1}\t{i2}\t{j2}")
         except Exception as e:
-            print(e)
+            sock.sendall(b'\x00')
             continue
 
         try:
@@ -81,7 +82,6 @@ try:
             phi -= 7.2 * math.pi / 180
 
         except ZeroDivisionError:
-            print("div 0")
             continue
 
         f1 = theta / math.pi
@@ -90,6 +90,7 @@ try:
         msg = struct.pack("!bff", 2, f1, f2)
 
         sock.sendall(msg)
+        sock.sendall(b'\x01')
 
 except Exception as e:
     print(e)
