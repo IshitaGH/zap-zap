@@ -3,9 +3,7 @@
 
 #dashboard-header {
     display: flex;
-    flex-direction: row wrap;
-    position: relative;
-    top: 0;
+    flex-direction: row;
     height: 8vh;
     color: aliceblue;
 }
@@ -19,7 +17,7 @@
     position: relative;
     justify-content: flex-end;
     height: 8vh;
-    position: absolute;
+    gap: 1rem;
 }
 
 #settings-grid-container {
@@ -55,11 +53,6 @@
 #status-message {
     padding: 0;
     margin: 2px;
-}
-
-#actions-container {
-    grid-column: 3 / 5;
-    grid-row: 1 / 2;
 }
 
 .button {

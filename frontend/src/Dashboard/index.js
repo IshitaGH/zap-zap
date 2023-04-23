@@ -20,22 +20,13 @@ class Dashboard extends React.Component {
     handleChange(evt) {
         if (evt.target.name == "logout") {
             sessionStorage.clear();
-        }
-        if (evt.target.name == "add_targets") {
-            console.log(!this.state.add_targets);
-            const temp = !this.state.add_targets
+        } else if (evt.target.name == "add_targets") {
             this.setState({
-                add_targets: temp,
+                add_targets: !this.state.add_targets,
             })
-        }
-        if (evt.target.name == "update_targets") {
+        } else if (evt.target.name == "update_targets") {
             this.setState({
                 update_targets: !this.state.update_targets,
-            })
-        }
-        else {
-            this.setState({
-                [evt.target.name]: evt.target.value
             })
         }
     }
@@ -110,10 +101,8 @@ class Dashboard extends React.Component {
                         <div id='user-box'>
                             <img src="https://preview.redd.it/oy43s2y9xym81.jpg?auto=webp&s=6ba16c42e3ce1e6328668f21ea48477fc6aa16ca" alt="profile-pic" id='profile-pic'/>
                             <p>Serena</p>
-                            <div id='actions-container'>
-                                <button id='trusted-button'>Account Settings</button>
-                                <Link name="logout" id='trusted-button' to='/' onClick={this.handleChange}>Logout</Link>
-                            </div>
+                            <button id='trusted-button'>Account Settings</button>
+                            <Link name="logout" id='trusted-button' to='/' onClick={this.handleChange}>Logout</Link>
                         </div>
                     </div>
                     <div id='settings-grid-container'>

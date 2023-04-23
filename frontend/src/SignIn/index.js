@@ -11,7 +11,7 @@ function SignIn() {
     const [error, setError] = useState(false);
     const navigate = useNavigate();
     async function validateUser(username, password) {
-        const response = await fetch('http://localhost:8000/endpoints/user'); //insert http request
+        const response = await fetch('http://localhost:8000/endpoints/users/'); //insert http request
         if (response.status == 200) {
             for (const user in response.data) {
                 if (user.username == username && user.password == password) {
