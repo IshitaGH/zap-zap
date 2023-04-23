@@ -55,12 +55,10 @@ def face_detection():
     # DELETE THE LINE FOLLOWING THIS EVENTUALLY!!! in here for now for cam_test.py
     return False
 
-def face_eye_detection(frame, gray):
+def face_eye_detection(gray):
     # multiple cascades: https://github.com/Itseez/opencv/tree/master/data/haarcascades
     face_cascade = cv2.CascadeClassifier('cascades/haarcascade_frontalface_default.xml')
     eye_cascade = cv2.CascadeClassifier('cascades/haarcascade_eye.xml')
-
-    eye_coords = ()
 
     faces = face_cascade.detectMultiScale(
         gray,
@@ -70,9 +68,7 @@ def face_eye_detection(frame, gray):
     )
 
     for (x,y,w,h) in faces:
-        # cv2.rectangle(frame,(x,y),(x+w,y+h),(255,0,0),2)
         roi_gray = gray[y:y+h, x:x+w]
-        roi_color = frame[y:y+h, x:x+w]
 
         eyes = eye_cascade.detectMultiScale(
             roi_gray,
@@ -82,11 +78,9 @@ def face_eye_detection(frame, gray):
         )
 
         for (ex, ey, ew, eh) in eyes:
-            cv2.rectangle(roi_color, (ex, ey), (ex + ew, ey + eh), (0, 255, 0), 2)
-            print("found eyes")
-            eye_coords = (ex + (ew/2), ey + (eh/2))
-
-    return eye_coords
+            return (ex + (ew/2) + x, ey + (eh/2) + y)
+    
+    return ()
 
 def image_collector_for_database():
     BASE_DIR = Path(__file__).resolve().parent.parent
@@ -191,12 +185,3 @@ def face_recognition(frame, gray):
         cv2.putText(frame, str(confidence), (x+5,y+h-5), font, 1, (255,255,0), 1)
     
     return False
-
-def find_person(frame, gray):
-    # if it doesn't recognize a trusted person, and there are other people detected, point laser there
-    eye_coords = face_eye_detection(frame, gray)
-    # if face_recognition(frame, gray):
-    #     print("recognized trusted person")
-    #     eye_coords = ()
-
-    return print(eye_coords)

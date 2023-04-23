@@ -6,7 +6,7 @@ import dotenv
 from pathlib import Path
 import os
 
-from detection_recognition import face_detection, face_eye_detection, image_collector_for_database, face_recognition, find_person
+from detection_recognition import face_detection, face_eye_detection, image_collector_for_database, face_recognition
 from servo_formula import get_servo_space_coord, solve_angles
 import math
 import struct
@@ -35,6 +35,9 @@ webcam_b = Webcam(url_b)
 camset = CamSet(webcam_a,webcam_b)
 windows = ("Camera_A", "Camera_B")
 
+for w in windows:
+    cv2.namedWindow(w, cv2.WINDOW_AUTOSIZE | cv2.WINDOW_KEEPRATIO | cv2.WINDOW_GUI_NORMAL)
+
 ip = os.environ.get('RPI_IP')
 
 sock = socket.create_connection((ip, 8000))
@@ -42,29 +45,44 @@ sock = socket.create_connection((ip, 8000))
 try:
     for frame_a, frame_b in camset:
 
+        match cv2.pollKey():
+            case 0x71:  # PRESS 'q' TO STOP!!
+                webcam_a.close()
+                webcam_b.close()
+                break
+
         frame_a = cv2.rotate(frame_a, cv2.ROTATE_90_CLOCKWISE)
         frame_b = cv2.rotate(frame_b, cv2.ROTATE_90_CLOCKWISE)
 
         gray_a = cv2.cvtColor(frame_a,cv2.COLOR_BGR2GRAY)
         gray_b = cv2.cvtColor(frame_b,cv2.COLOR_BGR2GRAY)
 
-        cv2.imshow(windows[0],frame_a)
-        cv2.imshow(windows[1],frame_b) 
+        cv2.imshow(windows[0],gray_a)
+        cv2.imshow(windows[1],gray_b) 
 
         try:
-            (i1, j1) = find_person(frame_a, gray_a)
-            (i2, j2) = find_person(frame_b, gray_b)
-            print("FOUND 2 FACES")
-        except Exception:
-            print("did not find 2 faces")
+            j1, i1 = face_eye_detection(gray_a)
+            j2, i2 = face_eye_detection(gray_b)
+            i1 = int(i1)
+            j1 = int(j1)
+            i2 = int(i2)
+            j2 = int(j2)
+        except Exception as e:
+            print(e)
             continue
 
-        x, y, z = get_servo_space_coord(i1, j1, i2, j2)
-        print(f"servo: {(x, y, z)}")
+        try:
+            x, y, z = get_servo_space_coord(i1, j1, i2, j2)
 
-        theta, phi = solve_angles(x, y, z)
+            theta, phi = solve_angles(x, y, z)
 
-        print(f"theta = {theta} phi = {phi}")
+            # Calibration
+            theta += 5.5 * math.pi / 180
+            phi -= 7.2 * math.pi / 180
+
+        except ZeroDivisionError:
+            print("div 0")
+            continue
 
         f1 = theta / math.pi
         f2 = phi / math.pi + 0.5
@@ -73,11 +91,8 @@ try:
 
         sock.sendall(msg)
 
-        match cv2.pollKey():
-            case 0x71:  # PRESS 'q' TO STOP!!
-                webcam_a.close()
-                webcam_b.close()
-                break
+except Exception as e:
+    print(e)
 
 finally:
     cv2.destroyAllWindows()

@@ -32,7 +32,7 @@ def get_servo_space_coord(i1: int, j1: int, i2: int, j2: int):
     y = b1 * b2x0 / denom
     z = c1 * b2x0 / denom
 
-    print(f"phone: {(x, y, z)}")
+    # print(f"phone: {(x, y, z)}")
 
     xs = -y
     ys = x - dx

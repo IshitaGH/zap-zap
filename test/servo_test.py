@@ -77,6 +77,10 @@ try:
 
                 theta, phi = solve_angles(x, y, z)
 
+                # Calibration
+                theta += 5.5 * math.pi / 180
+                phi -= 7.2 * math.pi / 180
+
                 print(f"theta = {theta} phi = {phi}")
 
                 f1 = theta / math.pi
