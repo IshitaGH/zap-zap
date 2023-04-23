@@ -23,3 +23,13 @@ class TargetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Target
         fields = '__all__'
+
+class ImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Target
+        fields = ['image']
+
+    def update(self, instance, validated_data):
+        instance.image = validated_data.get('image', instance.image)
+        instance.save()
+        return instance

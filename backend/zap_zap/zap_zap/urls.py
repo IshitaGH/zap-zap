@@ -32,5 +32,6 @@ urlpatterns = [
     path('password-reset-complete/', auth_views.PasswordResetCompleteView.as_view(template_name='users/password_reset_complete.html'), name = 'password_reset_complete'),
     path('photo-upload/', include('photo_upload.urls')),
     path('endpoints/', include('api.urls')),
+    # path('video-processing/', include('video_processing.urls'))
    
 ]

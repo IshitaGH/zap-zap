@@ -11,6 +11,9 @@ pillow = "*"
 crispy-bootstrap4 = "*"
 python-dotenv = "*"
 djangorestframework = "*"
+requests = "*"
+numpy = "*"
+opencv-contrib-python = "*"
 
 [dev-packages]
 

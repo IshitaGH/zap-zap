@@ -45,9 +45,11 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "photo_upload.apps.PhotoUploadConfig",
     "users.apps.UsersConfig",
+    "video_processing.apps.VideoProcessingConfig",
     'crispy_forms',
     'crispy_bootstrap4',
     'rest_framework',
+
 ]
 
 MIDDLEWARE = [
@@ -143,16 +145,16 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
 
-LOGGING = {
-    "version": 1,
-    "disable_existing_loggers": False,
-    "handlers": {
-        "console": {
-            "class": "logging.StreamHandler",
-        },
-    },
-    "root": {
-        "handlers": ["console"],
-        "level": "INFO",
-    },
-}
+# LOGGING = {
+#     "version": 1,
+#     "disable_existing_loggers": False,
+#     "handlers": {
+#         "console": {
+#             "class": "logging.StreamHandler",
+#         },
+#     },
+#     "root": {
+#         "handlers": ["console"],
+#         "level": "INFO",
+#     },
+# }
