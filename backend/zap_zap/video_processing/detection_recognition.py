@@ -185,3 +185,12 @@ def face_recognition(frame, gray):
         cv2.putText(frame, str(confidence), (x+5,y+h-5), font, 1, (255,255,0), 1)
     
     return False
+
+
+# def find_person(frame, gray):
+#     # if it doesn't recognize a trusted person, and there are other people detected, point laser there
+#     eye_coords = face_eye_detection(frame, gray)
+#     if face_recognition(frame, gray):
+#         eye_coords = ()
+
+#     return eye_coords
