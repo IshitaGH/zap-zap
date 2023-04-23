@@ -6,39 +6,44 @@ import { useNavigate } from "react-router-dom";
 
 function SignIn() {
     //login for users
-    const [email, setEmail] = useState("");
+    const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState(false);
     const navigate = useNavigate();
-    async function validateUser(email, password) {
-        const response = await fetch('https://pokeapi.co/api/v2/pokemon/dog'); //insert http request
+    async function validateUser(username, password) {
+        const response = await fetch('http://localhost:8000/endpoints/user'); //insert http request
         if (response.status == 200) {
-            navigate(`/dashboard${response.id}`);
+            for (const user in response.data) {
+                if (user.username == username && user.password == password) {
+                    window.sessionStorage.setItem("user-data", user);
+                }
+            }
+            navigate(`/dashboard${window.sessionStorage.getItem("user-data").id}`);
         }
         else {
             setError(true);
         } 
     }
     function validateForm() {
-        return email.length > 0 && password.length > 0;
+        return username.length > 0 && password.length > 0;
     }
     
     function handleSubmit(event) {
         event.preventDefault();
-        validateUser(email, password);
+        validateUser(username, password);
     }
     return (
         <div id='login-container'>
             <Form onSubmit={handleSubmit}>
-                <Form.Group size="lg" controlId="email">
-                    <Form.Label>Email</Form.Label>
+                <Form.Group size="lg" controlId="username" id='form-label'>
+                    <Form.Label>Username</Form.Label>
                     <Form.Control
                         autoFocus
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}/>
+                        type="username"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}/>
                 </Form.Group>
-                <Form.Group size="lg" controlId="password">
+                <Form.Group size="lg" controlId="password" id='form-label'>
                     <Form.Label>Password</Form.Label>
                     <Form.Control
                         type="password"

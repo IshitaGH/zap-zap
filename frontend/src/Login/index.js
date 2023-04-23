@@ -39,17 +39,18 @@ class Login extends React.Component {
             buttons_container = 
             <div id='buttons-container'>
                 <Link id='create-account-button' to='/signup'>Sign up!</Link>
-                <Link id='login-button' to='/signin'>Sign in!</Link>
+                <Link id='login-button' to='/signin'>Log in!</Link>
             </div>;
         } 
         else {
             buttons_container = 
-            <div id='get-started-button' onClick={this.handleChange}>  <h1>Get Started!</h1> <div className='triangle'> </div></div>;
+            <div id='get-started-button' onClick={this.handleChange}> Get Started!</div>;
         }
         return (
             <div className='page-container'>
                 <div className='content-container'>
                     <img src={logo} id='welcome-header'/>
+                    <p id='catch-phrase'>The last home security system you'll ever need.</p>
                     {buttons_container}
                 </div>
             </div>

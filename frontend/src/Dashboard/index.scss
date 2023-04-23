@@ -1,4 +1,5 @@
 @use "../index.scss";
+@import "~bootstrap/scss/bootstrap";
 
 #dashboard-header {
     display: flex;
@@ -6,7 +7,7 @@
     position: relative;
     top: 0;
     height: 8vh;
-    width: 100vh;
+    color: aliceblue;
 }
 
 #profile-pic {
@@ -23,9 +24,136 @@
 
 #settings-grid-container {
     display: grid;
-    column-gap: 20px;
+    color: aliceblue;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
+}
+
+#summary-and-actions {
+    display: flex;
+    flex-direction: row;
+    grid-column: 1 / 7;
+    grid-row: 1 / 2;
+}
+
+#summary-header {
+    padding: 0;
+    margin: 3px;
 }
 
 #summary-grid {
-    grid-column: 1 / span 4;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(111, 109, 105);
+    grid-column: 1 / 5;
+    width: 800px;
+    height: 300px;
+    grid-row: 1 / 2;
+}
+
+#status-message {
+    padding: 0;
+    margin: 2px;
+}
+
+#actions-container {
+    grid-column: 3 / 5;
+    grid-row: 1 / 2;
+}
+
+.button {
+    display: inline-flex;
+    height: 40px;
+    width: 150px;
+    border: 2px solid #BFC0C0;
+    margin: 20px 20px 20px 20px;
+    color: #BFC0C0;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-size: .8em;
+    letter-spacing: 1.5px;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+a {
+    color: #BFC0C0;
+    text-decoration: none;
+    letter-spacing: 1px;
+}
+
+#contact-button {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+#contact-button a {
+    position: relative;
+    transition: all .45s ease-Out;
+}
+
+#spin {
+    width: 0;
+    height: 0;
+    opacity: 0;
+    left: 70px;
+    top: 20px;
+    transform: rotate(0deg);
+    background: none;
+    position: absolute;
+    transition: all .5s ease-Out;
+}
+
+#contact-button:hover #spin {
+    width: 200%;
+    height: 500%;
+    opacity: 1;
+    left: -70px;
+    top: -70px;
+    background: #BFC0C0;
+    transform: rotate(80deg);
+}
+
+#contact-button:hover a {
+    color: #2D3142;
+}
+
+#security-settings-grid {
+    grid-column: 1 / 4;
+    grid-row: 2 / 5;
+}
+
+#activate-button {
+    width: 200px;
+    height: 35px;
+}
+
+#trusted-people-grid {
+    display: flex;
+    flex-direction: row;
+    grid-column: 1 / 7;
+    grid-row: 4 / 6;
+}
+
+#trusted-button {
+    height: 50px;
+    color: rgb(180, 184, 192);
+    background-color: #8f919a7e;
+    transition: 0.25s;
+    margin: 0 10px 0 10px;
+    box-shadow: 
+        0.3em 0.3em 0 0 rgb(84, 87, 91),
+        inset 0.3em 0.3em 0 0 rgb(83, 86, 90);
+    
+    &:hover,
+    &:focus {
+        border-color: rgb(59, 70, 86);
+        color: #fff;
+        box-shadow: 
+        0 0 0 0 rgb(77, 80, 85),
+        inset 6em 3.5em 0 0 rgb(80, 86, 95);
+    }
 }
