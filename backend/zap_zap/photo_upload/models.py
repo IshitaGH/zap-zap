@@ -10,7 +10,7 @@ def get_upload_path(instance, filename):
 
 # Create your models here.
 class Target(models.Model):
-    target_name = models.TextField(User)
+    target_name = models.TextField()
     image = models.ImageField(upload_to=get_upload_path, blank=True, null=True)
     # from video
     # image = models.ImageField(upload_to=get_upload_path, blank=True, null=True)

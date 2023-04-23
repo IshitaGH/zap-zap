@@ -3,7 +3,9 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import React from 'react';
 import logo from '../assets/logo.png';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import { endpoint } from "../util";
+import CSRFToken from "../csrftoken";
 
 class Dashboard extends React.Component {
     //dsahboard for users
@@ -13,7 +15,8 @@ class Dashboard extends React.Component {
             add_targets: false,
             update_targets: false,
             new_target_name: "",
-            new_target_pic: ""
+            new_target_pic: "",
+            files: null
         }
         this.handleChange = this.handleChange.bind(this);
     }
@@ -30,65 +33,42 @@ class Dashboard extends React.Component {
             })
         }
     }
-    handleSubmit(event) {
-        event.preventDefault();
-        //insert call post request
+
+    handleSubmit(action) {
+        return (event) => {
+            event.preventDefault();
+            if (action === "add") {
+                fetch(endpoint("add-target"))
+            } else {
+
+            }
+        }
     }
+
     render() {
         let trusted_add_form;
         let trusted_update_form;
         const add_targets = this.state.add_targets;
         const update_targets = this.state.update_targets;
         if (add_targets) {
-            trusted_add_form = 
-            <div>
-                <Form onSubmit={this.state.handleSubmit}>
-                    <Form.Group size="lg" controlId="name">
-                        <Form.Label>Name</Form.Label>
-                        <Form.Control
-                            autoFocus
-                            type="name"
-                            value={this.state.new_target_name}
-                            onChange={(e) => this.handleChange(e.target.value)}/>
-                    </Form.Group>
-                    <Form.Group size="lg" controlId="picture">
-                        <Form.Label>Picture</Form.Label>
-                        <Form.Control
-                            type="picture"
-                            value={this.state.new_target_pic}
-                            onChange={(e) => this.handleChange(e.target.value)}
-                        />
-                    </Form.Group>
-                    <Button block size="lg" type="submit"> Create new Trusted Profile</Button>
-                </Form>
-            </div>;
+            trusted_add_form =
+                <form method="POST" action={endpoint("add-target")}>
+                    <input name="target_name" placeholder="Target name" />
+                    <input name="author" value="3" className="hidden" />
+                    <button type="submit">Add Target</button>
+                    <CSRFToken />
+                </form>;
         }
         else {
             trusted_add_form = <div></div>
         }
         if (update_targets) {
-            trusted_update_form = 
-            <div>
-                <Form onSubmit={this.state.handleSubmit}>
-                    <Form.Group size="lg" controlId="name">
-                        <Form.Label>Name</Form.Label>
-                        <Form.Control
-                            autoFocus
-                            type="name"
-                            value={this.state.new_target_name}
-                            onChange={(e) => this.handleChange(e.target.value)}/>
-                    </Form.Group>
-                    <Form.Group size="lg" controlId="picture">
-                        <Form.Label>Picture</Form.Label>
-                        <Form.Control
-                            type="picture"
-                            value={this.state.new_target_pic}
-                            onChange={(e) => this.handleChange(e.target.value)}
-                        />
-                    </Form.Group>
-                    <Button block size="lg" type="submit"> Save Changes</Button>
-                </Form>
-            </div>;
+            trusted_update_form =
+                <form method="POST" action={endpoint("change-target-photo/2")} encType="multipart/form-data">
+                    <input type="file" name="image" />
+                    <button type="submit">Update Target Photo</button>
+                    <CSRFToken />
+                </form>;
         }
         else {
             trusted_update_form = <div></div>
@@ -97,8 +77,8 @@ class Dashboard extends React.Component {
             <div className='page-container'>
                 <div className='content-container'>
                     <div id='dashboard-header'>
-                        <img src={logo} alt="logo" id="logo"/>
-                        <img src="https://preview.redd.it/oy43s2y9xym81.jpg?auto=webp&s=6ba16c42e3ce1e6328668f21ea48477fc6aa16ca" alt="profile-pic" id='profile-pic'/>
+                        <img src={logo} alt="logo" id="logo" />
+                        <img src="https://preview.redd.it/oy43s2y9xym81.jpg?auto=webp&s=6ba16c42e3ce1e6328668f21ea48477fc6aa16ca" alt="profile-pic" id='profile-pic' />
                         <p>Serena</p>
                         <button className='main-button'>Account Settings</button>
                         <Link name="logout" className='main-button' to='/' onClick={this.handleChange}>Logout</Link>
